@@ -14,6 +14,9 @@ using Microsoft.OpenApi.Models;
 using Microsoft.EntityFrameworkCore;
 using TokenGenerator.Data;
 using RabbitMQ.Client;
+using swaggertest;
+using TokenGeneratorService.Services;
+using TokenGeneratorService;
 
 namespace TokenGenerator
 {
@@ -29,15 +32,17 @@ namespace TokenGenerator
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            services.AddControllersWithViews();
             services.AddSingleton<ConnectionFactory>();
+            services.AddScoped<ITokenService, TokenService>();
             services.AddSwaggerGen(options =>
             {
+                options.SchemaFilter<SchemaFilter>();
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
                     Title = "Token Generetor",
-                    Description = "An ASP.NET Core Web API for managing ToDo items",
+                    Description = "",
                     TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact
                     {
@@ -51,7 +56,7 @@ namespace TokenGenerator
                     }
                 });
             });
-
+            string a = Configuration.GetConnectionString("TokenGeneratorContext");
             services.AddDbContext<TokenGeneratorContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("TokenGeneratorContext")));
         }

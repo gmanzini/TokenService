@@ -12,7 +12,8 @@ namespace TokenUtils
         {
             try
             {
-                var array = token.ToString().ToCharArray().Select(Convert.ToInt32).ToArray();
+                var array = token.Select(x => x - 48).ToArray();
+
                 int auxVariable;
                 for (int i = 0; i < numberofRotations; i++)
                 {
@@ -20,11 +21,10 @@ namespace TokenUtils
                     {
                         auxVariable = array[0];
                         array[0] = array[j + 1];
-                        array[j + 1] = auxVariable;
+                        array[j + 1] = (byte)auxVariable;
                     }
                 }
-                string[] result = array.Select(i => i.ToString()).ToArray();
-                return Convert.ToInt64(String.Join("", result));
+                return Convert.ToInt64(String.Join("", array));
             }
             catch (Exception ex)
             {
