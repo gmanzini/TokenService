@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31729.503
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokenGeneratorService", "TokenGenerator\TokenGeneratorService.csproj", "{8F83A274-8A07-4252-8384-A0308C6CC488}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokenGenerator.Tests", "TokenGenerator.Tests\TokenGenerator.Tests.csproj", "{A1E8692D-5C21-424D-BB24-40774D1330B2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TokenValidatorService", "TokenValidator\TokenValidatorService.csproj", "{6F88E980-EA1E-4331-94A8-331ED7D4B6B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TokenProcessor", "HTTPUtils\TokenProcessor.csproj", "{A1E51CE2-2714-41D1-B989-FC2C2ACCBADB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CommonUtilities", "CommonUtilities", "{93FB7B34-2668-49D3-886F-4C0BEBA04DF0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AsyncMessagesUtil", "AsyncMessagesUtil\AsyncMessagesUtil.csproj", "{E566D3F2-B22A-449E-8265-54A1FDB5DC78}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8F83A274-8A07-4252-8384-A0308C6CC488}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F83A274-8A07-4252-8384-A0308C6CC488}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F83A274-8A07-4252-8384-A0308C6CC488}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F83A274-8A07-4252-8384-A0308C6CC488}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1E8692D-5C21-424D-BB24-40774D1330B2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1E8692D-5C21-424D-BB24-40774D1330B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1E8692D-5C21-424D-BB24-40774D1330B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1E8692D-5C21-424D-BB24-40774D1330B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6F88E980-EA1E-4331-94A8-331ED7D4B6B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6F88E980-EA1E-4331-94A8-331ED7D4B6B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6F88E980-EA1E-4331-94A8-331ED7D4B6B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6F88E980-EA1E-4331-94A8-331ED7D4B6B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A1E51CE2-2714-41D1-B989-FC2C2ACCBADB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A1E51CE2-2714-41D1-B989-FC2C2ACCBADB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1E51CE2-2714-41D1-B989-FC2C2ACCBADB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A1E51CE2-2714-41D1-B989-FC2C2ACCBADB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E566D3F2-B22A-449E-8265-54A1FDB5DC78}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E566D3F2-B22A-449E-8265-54A1FDB5DC78}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E566D3F2-B22A-449E-8265-54A1FDB5DC78}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E566D3F2-B22A-449E-8265-54A1FDB5DC78}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A1E51CE2-2714-41D1-B989-FC2C2ACCBADB} = {93FB7B34-2668-49D3-886F-4C0BEBA04DF0}
+		{E566D3F2-B22A-449E-8265-54A1FDB5DC78} = {93FB7B34-2668-49D3-886F-4C0BEBA04DF0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {17E4A64A-4794-4C1E-AB5D-06EEC7FD23F6}
+	EndGlobalSection
+EndGlobal
