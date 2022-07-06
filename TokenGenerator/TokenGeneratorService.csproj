@@ -26,8 +26,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AsyncMessagesUtil\AsyncMessagesUtil.csproj" />
-    <ProjectReference Include="..\HTTPUtils\TokenProcessor.csproj" />
+    <ProjectReference Include="..\CommonUtilities\AsyncMessagesUtil\AsyncMessagesUtil.csproj" />
+    <ProjectReference Include="..\CommonUtilities\TokenGenerator\TokenProcessor.csproj" />
   </ItemGroup>
 
 
