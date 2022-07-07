@@ -17,6 +17,8 @@ using RabbitMQ.Client;
 using swaggertest;
 using TokenGeneratorService.Services;
 using TokenGeneratorService;
+using AutoMapper;
+using TokenGeneratorService.Mapper;
 
 namespace TokenGenerator
 {
@@ -32,9 +34,15 @@ namespace TokenGenerator
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+         
+       
+
+            services.AddMvc();
             services.AddControllersWithViews();
             services.AddSingleton<ConnectionFactory>();
             services.AddScoped<ITokenService, TokenService>();
+         
             services.AddSwaggerGen(options =>
             {
                 options.SchemaFilter<SchemaFilter>();
@@ -57,8 +65,20 @@ namespace TokenGenerator
                 });
             });
             string a = Configuration.GetConnectionString("TokenGeneratorContext");
+
             services.AddDbContext<TokenGeneratorContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("TokenGeneratorContext")));
+
+            // Auto Mapper Configurations
+            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            //var mapperConfig = new MapperConfiguration(mc =>
+            //{
+            //    mc.AddProfile(new MappingProfile());
+            //});
+
+            //IMapper mapper = mapperConfig.CreateMapper();
+            //services.AddSingleton(mapper);
+      
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

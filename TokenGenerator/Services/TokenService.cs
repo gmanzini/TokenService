@@ -28,7 +28,7 @@ namespace TokenGeneratorService
             messageFactory = _messageFactory;
             configuration = _configuration;
         }
-        public async Task<RegisterCardResponseDTO> CreateToken(CardDTO customerCard, TokenGeneratorContext _context)
+        public async Task<RegisterCardResponseDTO> SaveCard(CardDTO customerCard, TokenGeneratorContext _context)
         {
             try
             {
@@ -90,9 +90,10 @@ namespace TokenGeneratorService
             }
         }
 
-        public bool ValidateToken()
+        public bool ValidateToken(TokenGeneratorContext _context,CardDTO card)
         {
-            throw new NotImplementedException();
+            _context.Card.SingleOrDefaultAsync(w => w.Token == 3532532);
+            return true;
         }
     }
 }
