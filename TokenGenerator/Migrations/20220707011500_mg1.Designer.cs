@@ -10,7 +10,7 @@ using TokenGenerator.Data;
 namespace TokenGeneratorService.Migrations
 {
     [DbContext(typeof(TokenGeneratorContext))]
-    [Migration("20220706221452_mg1")]
+    [Migration("20220707011500_mg1")]
     partial class mg1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,7 +38,7 @@ namespace TokenGeneratorService.Migrations
 
             modelBuilder.Entity("TokenGeneratorService.Domain.CardDTO", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<int>("CardId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -58,7 +58,7 @@ namespace TokenGeneratorService.Migrations
                     b.Property<long>("Token")
                         .HasColumnType("bigint");
 
-                    b.HasKey("Id");
+                    b.HasKey("CardId");
 
                     b.ToTable("Card");
                 });

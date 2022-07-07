@@ -76,7 +76,7 @@ namespace TokenGeneratorService
                         }
                     }
                 }
-                int id = (int)customerCard.Id;
+                int id = (int)customerCard.CardId;
                 return new RegisterCardResponseDTO()
                 {
                     CardId = id,
@@ -90,10 +90,39 @@ namespace TokenGeneratorService
             }
         }
 
-        public bool ValidateToken(TokenGeneratorContext _context,CardDTO card)
+        public bool ValidateToken(TokenGeneratorContext _context, CardDTO card)
         {
-            _context.Card.SingleOrDefaultAsync(w => w.Token == 3532532);
-            return true;
+            try
+            {
+                CardDTO dbcard = null;
+                try
+                {
+                     dbcard = _context.Card.SingleOrDefault(w => w.CardId == card.CardId);
+                }
+                catch (Exception ex)
+                {
+                    throw new Exception($"An error occurred trying to search the card at the database: {ex.Message}");
+                }
+                TimeSpan timeSpan = DateTime.Now - dbcard.RegistrationDate;
+                if (timeSpan.TotalMinutes > 30)
+                {
+                    return false;
+                }
+                if (card.CustomerID != dbcard.CustomerID)
+                {
+                    return false;
+                }
+                long token = TokenGeneration.GenerateToken(dbcard.CardNumber.ToString()[^4..], card.CVV);
+                if (dbcard.Token != token)
+                {
+                    return false;
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw new Exception(ex.Message);
+            }
         }
     }
 }

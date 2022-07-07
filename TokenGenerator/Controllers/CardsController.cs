@@ -23,15 +23,15 @@ namespace TokenGenerator.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class CustomerCardsController : Controller
+    public class CardsController : Controller
     {
         private readonly TokenGeneratorContext _context;
         private ConnectionFactory _messageFactory;
-        private ILogger<CustomerCardsController> _logger;
+        private ILogger<CardsController> _logger;
         private IConfiguration _configuration;
         private ITokenService _tokenGeneratorService;
         private IMapper _mapper;
-        public CustomerCardsController(IMapper mapper,IConfiguration configuration, ITokenService tokenGeneratorService, ConnectionFactory messageFactory, ILogger<CustomerCardsController> logger, TokenGeneratorContext context)
+        public CardsController(IMapper mapper,IConfiguration configuration, ITokenService tokenGeneratorService, ConnectionFactory messageFactory, ILogger<CardsController> logger, TokenGeneratorContext context)
         {
             _mapper = mapper;
             _configuration = configuration;
@@ -41,7 +41,7 @@ namespace TokenGenerator.Controllers
             _tokenGeneratorService = tokenGeneratorService;
         }
 
-        [HttpPost]
+        [HttpPost("SaveCard")]
         public async Task<IActionResult> SaveCard(SaveCardFilter customerCard)
         {
             try
@@ -52,9 +52,7 @@ namespace TokenGenerator.Controllers
                     var response = await _tokenGeneratorService.SaveCard(card, _context);
 
                     return Ok(new { CardId = response.CardId, RegistrationDate = response.RegistrationDate, Token = response.Token });
-                    //#region Publish Token and Registration Date to Rabbit MQ
-                    //AsyncMessaging.Publish(_messageFactory,_configuration.GetValue<string>("TokenQueue"),JsonSerializer.Serialize(response));
-                    //#endregion
+                  
                 }
 
                 return BadRequest(customerCard);
@@ -65,12 +63,21 @@ namespace TokenGenerator.Controllers
                 return StatusCode(500, "Generic exception during the request, please contact your administrator");
             }
         }
-        [HttpGet]
-        public async Task<IActionResult> ValidateToken(ValidateTokenFilter filter)
+        [HttpPost("ValidateToken")]
+        public IActionResult ValidateToken(ValidateTokenFilter filter)
         {
-
-
-            return Ok();
+            try
+            {
+                var card = _mapper.Map<CardDTO>(filter);
+                bool result = _tokenGeneratorService.ValidateToken(_context, card);
+                if (result) return Ok(result);
+                return BadRequest(result);
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("There was an error during the request: " + ex.Message);
+                return StatusCode(500, "Generic exception during the request, please contact your administrator");
+            }
         }
     }
 }

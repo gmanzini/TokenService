@@ -11,7 +11,7 @@ namespace TokenGeneratorService.Migrations
                 name: "Card",
                 columns: table => new
                 {
-                    Id = table.Column<int>(nullable: false)
+                    CardId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CardNumber = table.Column<long>(nullable: false),
                     CVV = table.Column<int>(nullable: false),
@@ -21,7 +21,7 @@ namespace TokenGeneratorService.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Card", x => x.Id);
+                    table.PrimaryKey("PK_Card", x => x.CardId);
                 });
 
             migrationBuilder.CreateTable(
@@ -38,7 +38,7 @@ namespace TokenGeneratorService.Migrations
                         name: "FK_Customer_Card_CardId",
                         column: x => x.CardId,
                         principalTable: "Card",
-                        principalColumn: "Id",
+                        principalColumn: "CardId",
                         onDelete: ReferentialAction.Restrict);
                 });
 

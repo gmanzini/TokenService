@@ -20,8 +20,8 @@ namespace TokenGeneratorService.Domain
         public DateTime RegistrationDate { get; set; }
 
         public int CustomerID { get; set; }
-       
+        
         [Key]
-        public int Id { get; set; }
+        public int CardId { get; set; }
     }
 }
