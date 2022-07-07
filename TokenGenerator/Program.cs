@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace TokenGenerator
 {
-    public class Program
+    public  class Program
     {
         public static void Main(string[] args)
         {
@@ -24,4 +24,5 @@ namespace TokenGenerator
                     
                 });
     }
+
 }

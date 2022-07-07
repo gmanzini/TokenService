@@ -22,7 +22,7 @@ using TokenGeneratorService.Mapper;
 
 namespace TokenGenerator
 {
-    public class Startup
+    public partial class Startup
     {
         public Startup(IConfiguration configuration)
         {
@@ -64,7 +64,6 @@ namespace TokenGenerator
                     }
                 });
             });
-            string a = Configuration.GetConnectionString("TokenGeneratorContext");
 
             services.AddDbContext<TokenGeneratorContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("TokenGeneratorContext")));
@@ -81,7 +80,7 @@ namespace TokenGenerator
       
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             var scope = app.ApplicationServices.CreateScope();
