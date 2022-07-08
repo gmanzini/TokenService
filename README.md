@@ -40,6 +40,10 @@ Right Click on TokenGeneratorService Project > Properties > Debug
 
 ![Screenshot 2022-07-08 114716](https://user-images.githubusercontent.com/54852015/178019422-6ad6142c-6552-4203-9e09-ade2434c58a8.jpg)
 
+$ Change start from IIS Express to Docker (This will verify that docker is installed correctly and pull the images )
+![image](https://user-images.githubusercontent.com/54852015/178029492-eabd77c0-cc32-403e-ad30-f68a04a78bfe.png)
+
+
 $ Connecting to local or remote SQL Server from Docker Containers
 
 1. You must configure SQL Server with Mixed Mode Authentication. For remote connection you need to supply user name and password.
