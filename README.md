@@ -49,8 +49,8 @@ The following tools were used in the project:
 - [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1)
 - [Docker](https://www.docker.com/products/docker-desktop/)
 - [Swagger](https://swagger.io/)
-
-
+- [Entity Framework](https://docs.microsoft.com/en-us/ef/)
+- [SQL Server]([https://swagger.io/](https://www.microsoft.com/en-us/sql-server/sql-server-downloads))
 
 ### Autor
 ---
