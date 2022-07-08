@@ -49,7 +49,7 @@ namespace TokenGenerator
                 options.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Token Generetor",
+                    Title = "Token Generator",
                     Description = "",
                     TermsOfService = new Uri("https://example.com/terms"),
                     Contact = new OpenApiContact
