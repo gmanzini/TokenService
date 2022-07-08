@@ -20,7 +20,7 @@
 
 - [x] Save Card and Generate the Token
 - [x] Validate Token
--
+
 
 ### Pre Requirements
 
@@ -38,7 +38,8 @@ $ git clone <https://github.com/gmanzini/TokenService.git>
 $ Setup Docker profile as startup profile
 
 
-https://user-images.githubusercontent.com/54852015/178016035-8705dcb3-16cf-4595-925d-a2f5271b96e7.png
+![Screenshot 2022-07-08 114716](https://user-images.githubusercontent.com/54852015/178019422-6ad6142c-6552-4203-9e09-ade2434c58a8.jpg)
+
 
 
 
@@ -48,7 +49,7 @@ https://user-images.githubusercontent.com/54852015/178016035-8705dcb3-16cf-4595-
 
 ### 🛠 Technologies
 
-As seguintes ferramentas foram usadas na construção do projeto:
+The following tools were used in the project:
 
 - [Visual Studio](https://visualstudio.microsoft.com/)
 - [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1)
