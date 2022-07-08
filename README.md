@@ -48,7 +48,7 @@ The following tools were used in the project:
 $ git clone https://github.com/gmanzini/TokenService.git
 
 # 
-$ Setup Docker profile as startup profile
+$ Setup Docker profile as debug profile
 Right Click on TokenGeneratorService Project > Properties > Debug
 ```
 
