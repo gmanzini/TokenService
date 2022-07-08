@@ -64,7 +64,7 @@ namespace TokenGenerator.Tests.Controller
         [Fact]
         public async Task SaveCard_ReturnsCreatedResponse()
         {
-             //System.Diagnostics.Debugger.Launch();
+          
             // Arrange
             var card = new SaveCardFilter()
             {
@@ -85,13 +85,91 @@ namespace TokenGenerator.Tests.Controller
             {
                CardNumber = 12345678,
                CustomerID = 1,
-               CVV = 9999999 
+               CVV = 2
             };
             _controller.ModelState.AddModelError("CVV", "Value must be between 1 to 99999");
             // Act
             var badResponse = _controller.SaveCard(CVVWrongLength );
             // Assert
             Assert.IsType<BadRequestObjectResult>(badResponse);
+
+        }
+
+        [Fact]
+        public async Task ValidateToken_ExpiredToken_ReturnsBadRequest()
+        {
+            // Arrange
+            var expired = new ValidateTokenFilter()
+            {
+                CardId = 2,
+                CustomerID = 2,
+                CVV = 2,
+                Token = 7856
+            };
+            
+            // Act
+            var response = _controller.ValidateToken(expired);
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(response);
+
+        }
+
+        [Fact]
+        public async Task ValidateToken_DifferentOwner_ReturnsBadRequest()
+        {
+            // Arrange
+            var expired = new ValidateTokenFilter()
+            {
+                CardId = 3,
+                CustomerID = 2,
+                CVV = 2,
+                Token = 7856
+            };
+
+            // Act
+            var response = _controller.ValidateToken(expired);
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(response);
+
+        }
+
+
+        [Fact]
+        public async Task ValidateToken_DifferentToken_ReturnsBadRequest()
+        {
+            // Arrange
+            var diftoken = new ValidateTokenFilter()
+            {
+                CardId = 4,
+                CustomerID = 1,
+                CVV = 3,
+                Token = 7856
+            };
+          //  System.Diagnostics.Debugger.Launch();
+            // Act
+            var response = _controller.ValidateToken(diftoken);
+            // Assert
+            Assert.IsType<BadRequestObjectResult>(response);
+
+        }
+
+        [Fact]
+        public async Task ValidateToken_ValidScenario_ReturnsOk()
+        {
+            
+            // Arrange
+            var card = new ValidateTokenFilter()
+            {
+                CardId = 1,
+                CustomerID = 1,
+                CVV = 2,
+                Token = 7856
+            };
+
+            // Act
+            var response = _controller.ValidateToken(card);
+            // Assert
+            Assert.IsType<OkObjectResult>(response);
 
         }
 

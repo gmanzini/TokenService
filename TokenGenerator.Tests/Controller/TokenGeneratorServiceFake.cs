@@ -12,17 +12,24 @@ using TokenGeneratorService;
 using TokenGeneratorService.Domain;
 using TokenGeneratorService.Services;
 using TokenUtils;
+using System.Linq;
 
 namespace TokenGenerator.Tests.Controller
 {
     class TokenGeneratorServiceFake : ITokenService
     {
-        private CardDTO _card;
-        
+        public CardDTO _card;
+       
+        public static List<CardDTO> cards = new List<CardDTO>();
         public TokenGeneratorServiceFake()
         {
-            _card = new CardDTO() { CardId = 1, CardNumber = 12345678, CustomerID = 1, CVV = 2, RegistrationDate = DateTime.Now, Token = 123456 };
-           
+            _card = new CardDTO();
+            cards.Add(new CardDTO() { CardId = 1, CardNumber = 12345678, CustomerID = 1, CVV = 2, RegistrationDate = DateTime.Now, Token = 7856 });             //Correct Information
+            cards.Add(new CardDTO() { CardId = 2, CardNumber = 12345678, CustomerID = 1, CVV = 2, RegistrationDate = DateTime.Now.AddDays(-1), Token = 7856 }); //Incorrect Information - Expired Date
+            cards.Add(new CardDTO() { CardId = 3, CardNumber = 12345678, CustomerID = 1, CVV = 2, RegistrationDate = DateTime.Now, Token = 7856 });             //Incorrect Information - Different Owner
+            cards.Add(new CardDTO() { CardId = 4, CardNumber = 12345678, CustomerID = 1, CVV = 3, RegistrationDate = DateTime.Now, Token = 7856 });             //Incorrect Information - Invalid Token
+
+
         }
         public RegisterCardResponseDTO SaveCard(CardDTO customerCard, TokenGeneratorContext _context)
         {
@@ -38,19 +45,18 @@ namespace TokenGenerator.Tests.Controller
 
         public bool ValidateToken(TokenGeneratorContext _context, CardDTO customerCard)
         {
-
-
-            TimeSpan timeSpan = DateTime.Now - _card.RegistrationDate;
+            CardDTO dbCard = cards.FirstOrDefault(w => w.CardId == customerCard.CardId);
+            TimeSpan timeSpan = DateTime.Now - dbCard.RegistrationDate;
             if (timeSpan.TotalMinutes > 30)
             {
                 return false;
             }
-            if (customerCard.CustomerID != _card.CustomerID)
+            if (customerCard.CustomerID != dbCard.CustomerID)
             {
                 return false;
             }
-            long token = TokenGeneration.GenerateToken(_card.CardNumber.ToString()[^4..], _card.CVV);
-            if (_card.Token != token)
+            long token = TokenGeneration.GenerateToken(dbCard.CardNumber.ToString()[^4..], customerCard.CVV);
+            if (dbCard.Token != token)
             {
                 return false;
             }
