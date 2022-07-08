@@ -31,7 +31,7 @@ Besides that, a good IDE like [Visual Studio](https://visualstudio.microsoft.com
 
 ```bash
 # Clone this repo
-$ git clone <https://github.com/gmanzini/TokenService.git>
+$ git clone https://github.com/gmanzini/TokenService.git
 
 # 
 $ Setup Docker profile as startup profile
