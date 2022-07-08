@@ -27,6 +27,20 @@ Before you start, you`re going to need the following tools:
 [Git](https://git-scm.com), [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1), [Docker Desktop](https://www.docker.com/products/docker-desktop/).
 Besides that, a good IDE like [Visual Studio](https://visualstudio.microsoft.com/)
 
+
+
+### 🛠 Technologies
+
+The following tools were used in the project:
+
+- [Visual Studio](https://visualstudio.microsoft.com/)
+- [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1)
+- [Docker](https://www.docker.com/products/docker-desktop/)
+- [Swagger](https://swagger.io/)
+- [Entity Framework](https://docs.microsoft.com/en-us/ef/)
+- [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
+- [XUnit](https://xunit.net/)
+
 ### 🎲 Running the API (server)
 
 ```bash
@@ -91,19 +105,6 @@ $To create the database locally, all you have to do is ensure your connection is
 update-database
 ```
 ![image](https://user-images.githubusercontent.com/54852015/178031281-2e7bb500-809f-4333-99dc-7e8e0ac0240b.png)
-
-### 🛠 Technologies
-
-The following tools were used in the project:
-
-- [Visual Studio](https://visualstudio.microsoft.com/)
-- [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1)
-- [Docker](https://www.docker.com/products/docker-desktop/)
-- [Swagger](https://swagger.io/)
-- [Entity Framework](https://docs.microsoft.com/en-us/ef/)
-- [SQL Server](https://www.microsoft.com/en-us/sql-server/sql-server-downloads)
-- [XUnit](https://xunit.net/)
-
 ### Autor
 ---
 
