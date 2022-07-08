@@ -9,9 +9,8 @@
 
 <p align="center">
  <a href="#Features">Features</a> •
-  <a href="#Pre requirements">Pre Requirements</a> • 
- <a href="#Technologies">Tecnologias</a> • 
- <a href="#licenc-a">Licença</a> • 
+  <a href="#Prerequirement">Prerequirement</a> • 
+ <a href="#Technologies">Technologies</a> • 
  <a href="#autor">Autor</a>
 </p>
 
@@ -22,7 +21,7 @@
 - [x] Validate Token
 
 
-### Pre Requirements
+### Prerequirement
 
 Before you start, you`re going to need the following tools: 
 [Git](https://git-scm.com), [.NET Core 3.1](https://dotnet.microsoft.com/en-us/download/dotnet/3.1), [Docker Desktop](https://www.docker.com/products/docker-desktop/).
