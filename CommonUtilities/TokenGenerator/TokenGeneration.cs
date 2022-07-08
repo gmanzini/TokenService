@@ -8,11 +8,11 @@ namespace TokenUtils
 {
     public static class TokenGeneration
     {
-        public static long GenerateToken(string token, int numberofRotations)
+        public static long GenerateToken(string cardNumber, int numberofRotations)
         {
             try
             {
-                var array = token.Select(x => x - 48).ToArray();
+                var array = cardNumber.Select(x => x - 48).ToArray();
 
                 int auxVariable;
                 for (int i = 0; i < numberofRotations; i++)

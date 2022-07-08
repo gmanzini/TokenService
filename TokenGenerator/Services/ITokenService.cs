@@ -10,7 +10,7 @@ namespace TokenGeneratorService.Services
 {
     public interface ITokenService
     {
-        public Task<RegisterCardResponseDTO> SaveCard(CardDTO customerCard, TokenGeneratorContext _context);
+        public RegisterCardResponseDTO SaveCard(CardDTO customerCard, TokenGeneratorContext _context);
 
         public bool ValidateToken(TokenGeneratorContext _context,CardDTO customerCard);
     }

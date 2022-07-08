@@ -28,7 +28,7 @@ namespace TokenGeneratorService
             messageFactory = _messageFactory;
             configuration = _configuration;
         }
-        public async Task<RegisterCardResponseDTO> SaveCard(CardDTO customerCard, TokenGeneratorContext _context)
+        public RegisterCardResponseDTO SaveCard(CardDTO customerCard, TokenGeneratorContext _context)
         {
             try
             {
@@ -40,7 +40,7 @@ namespace TokenGeneratorService
                 _context.Card.Add(customerCard);
                 try
                 {
-                    await _context.SaveChangesAsync();
+                     _context.SaveChanges();
                 }
                 catch (DbUpdateConcurrencyException ex)
                 {
@@ -60,7 +60,7 @@ namespace TokenGeneratorService
                                 proposedValues[property] = proposedValue;
                             }
 
-                            await _context.SaveChangesAsync();
+                             _context.SaveChangesAsync();
 
                             entry.OriginalValues.SetValues(databaseValues);
                             //The new proposed value is saved but the overwriten value is subscribed to a queue to be checked 
@@ -75,6 +75,10 @@ namespace TokenGeneratorService
                                 + entry.Metadata.Name);
                         }
                     }
+                }
+                catch(Exception ex)
+                {
+                    throw new Exception($"An error ocurred while persisting the data: {ex.Message}");
                 }
                 int id = (int)customerCard.CardId;
                 return new RegisterCardResponseDTO()

@@ -14,6 +14,7 @@ using RabbitMQ.Client;
 using TokenGenerator;
 using TokenGenerator.Data;
 using TokenGenerator.Model;
+using TokenGeneratorService;
 using TokenGeneratorService.Domain;
 using TokenGeneratorService.Domain.Filters;
 using TokenGeneratorService.Services;
@@ -40,18 +41,24 @@ namespace TokenGenerator.Controllers
             _messageFactory = messageFactory;
             _tokenGeneratorService = tokenGeneratorService;
         }
+        public CardsController(ITokenService tokenService,ILogger<CardsController> logger, IMapper mapper)
+        {
+            _tokenGeneratorService = tokenService;
+            _logger = logger;
+            _mapper = mapper;
+        }
 
         [HttpPost("SaveCard")]
-        public async Task<IActionResult> SaveCard(SaveCardFilter customerCard)
+        public IActionResult SaveCard(SaveCardFilter customerCard)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     var card = _mapper.Map<CardDTO>(customerCard);
-                    var response = await _tokenGeneratorService.SaveCard(card, _context);
+                    var response =  _tokenGeneratorService.SaveCard(card, _context);
 
-                    return Ok(new { CardId = response.CardId, RegistrationDate = response.RegistrationDate, Token = response.Token });
+                    return Created($"www.example/api/card/{card.CardId}",response);
                   
                 }
 
