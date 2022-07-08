@@ -35,7 +35,7 @@ $ git clone <https://github.com/gmanzini/TokenService.git>
 
 # 
 $ Setup Docker profile as startup profile
-
+Right Click on TokenGeneratorService Project > Properties > Debug
 ```
 
 ![Screenshot 2022-07-08 114716](https://user-images.githubusercontent.com/54852015/178019422-6ad6142c-6552-4203-9e09-ade2434c58a8.jpg)
