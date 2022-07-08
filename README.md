@@ -82,6 +82,13 @@ $ Connecting to local or remote SQL Server from Docker Containers
 11. Overwrite the ip with the NAT IP address from the previous step
 ![image](https://user-images.githubusercontent.com/54852015/178028369-c413080f-2980-4876-83fd-047e18404580.png)
 
+
+
+
+$To create the database locally, all you have to do is ensure your connection is working and run the migration command from the package manager console:
+update-database
+![image](https://user-images.githubusercontent.com/54852015/178031281-2e7bb500-809f-4333-99dc-7e8e0ac0240b.png)
+
 ### 🛠 Technologies
 
 The following tools were used in the project:
