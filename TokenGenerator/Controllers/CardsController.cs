@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using RabbitMQ.Client;
 using TokenGenerator;
@@ -32,6 +33,7 @@ namespace TokenGenerator.Controllers
         private IConfiguration _configuration;
         private ITokenService _tokenGeneratorService;
         private IMapper _mapper;
+        [ActivatorUtilitiesConstructor]
         public CardsController(IMapper mapper,IConfiguration configuration, ITokenService tokenGeneratorService, ConnectionFactory messageFactory, ILogger<CardsController> logger, TokenGeneratorContext context)
         {
             _mapper = mapper;

@@ -101,27 +101,34 @@ namespace TokenGeneratorService
                 CardDTO dbcard = null;
                 try
                 {
-                     dbcard = _context.Card.SingleOrDefault(w => w.CardId == card.CardId);
+                    dbcard = _context.Card.SingleOrDefault(w => w.CardId == card.CardId);
                 }
                 catch (Exception ex)
                 {
                     throw new Exception($"An error occurred trying to search the card at the database: {ex.Message}");
                 }
-                TimeSpan timeSpan = DateTime.Now - dbcard.RegistrationDate;
-                if (timeSpan.TotalMinutes > 30)
+                if (dbcard != null)
+                {
+                    TimeSpan timeSpan = DateTime.Now - dbcard.RegistrationDate;
+                    if (timeSpan.TotalMinutes > 30)
+                    {
+                        return false;
+                    }
+                    if (card.CustomerID != dbcard.CustomerID)
+                    {
+                        return false;
+                    }
+                    long token = TokenGeneration.GenerateToken(dbcard.CardNumber.ToString()[^4..], card.CVV);
+                    if (dbcard.Token != token)
+                    {
+                        return false;
+                    }
+                    return true;
+                }
+                else
                 {
                     return false;
                 }
-                if (card.CustomerID != dbcard.CustomerID)
-                {
-                    return false;
-                }
-                long token = TokenGeneration.GenerateToken(dbcard.CardNumber.ToString()[^4..], card.CVV);
-                if (dbcard.Token != token)
-                {
-                    return false;
-                }
-                return true;
             }
             catch (Exception ex)
             {

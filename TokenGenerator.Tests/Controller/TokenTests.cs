@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Net.Http;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Tests;
 using TokenGenerator.Controllers;
@@ -29,17 +30,11 @@ namespace TokenGenerator.Tests.Controller
         private CardsController _controller;
         private ITokenService _service;
         private IMapper _mapper;
-
+        private IWebHostBuilder _builder;
 
         public TokenTests()
         {
-
-
-            var mockMapper = new MapperConfiguration(cfg =>
-            {
-                cfg.AddProfile(new MappingProfile());
-            });
-            _mapper = mockMapper.CreateMapper();
+            #region Setup Test Server
 
             var projectDir = Directory.GetCurrentDirectory();
             var configuration = (new ConfigurationBuilder().SetBasePath(projectDir).AddJsonFile("appsettings.json")).Build();
@@ -49,18 +44,69 @@ namespace TokenGenerator.Tests.Controller
                 .UseStartup<CustomStartup.CustomStartup>();
             TestServer testServer = new TestServer(builder);
             _client = testServer.CreateClient();
-            using var loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
-             .SetMinimumLevel(LogLevel.Trace)
-               .AddConsole());
- 
-            ILogger<CardsController> logger = loggerFactory.CreateLogger<CardsController>();
-            
-            _service = new TokenGeneratorServiceFake();
-            
-            _controller = new CardsController(_service,logger,_mapper);
-        }
+            _client.BaseAddress = new Uri("https://localhost:60793");
 
-        
+            #endregion
+
+            #region Setup mock required instances
+            var loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
+           .SetMinimumLevel(LogLevel.Trace)
+             .AddConsole());
+
+            var mockMapper = new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile(new MappingProfile());
+            });
+            _mapper = mockMapper.CreateMapper();
+
+
+            ILogger<CardsController> logger = loggerFactory.CreateLogger<CardsController>();
+
+            #endregion
+
+            #region Setup Controller by using a fake Service implementation
+
+            _service = new TokenGeneratorServiceFake();
+            _controller = new CardsController(_service,logger,_mapper);
+
+            #endregion
+        }
+        [Fact]
+        public async Task SaveCard_ShouldReturnContent()
+        {
+            //Arrange
+            var card = new SaveCardFilter()
+            {
+                CardNumber = 12345678,
+                CustomerID = 1,
+                CVV = 9999
+            };
+            //Act
+            var response = await _client.PostAsync("/Cards/SaveCard",new StringContent(JsonSerializer.Serialize<SaveCardFilter>(card)));
+            //Assert
+            var responseString = await response.Content.ReadAsStringAsync();
+            Assert.NotEmpty(responseString);
+            
+         
+        }
+        [Fact]
+        public async Task ValidateCard_ShouldReturnBool()
+        {
+            //Arrange
+            var card = new SaveCardFilter()
+            {
+                CardNumber = 12345678,
+                CustomerID = 1,
+                CVV = 9999
+            };
+            //Act
+            var response = await _client.PostAsync("/Cards/ValidateToken", new StringContent(JsonSerializer.Serialize<SaveCardFilter>(card)));
+            //Assert
+            var responseString = await response.Content.ReadAsStringAsync();
+            Assert.NotNull(responseString);
+
+
+        }
         [Fact]
         public async Task SaveCard_ReturnsCreatedResponse()
         {
