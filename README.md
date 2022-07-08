@@ -61,7 +61,7 @@ The following tools were used in the project:
  <sub><b>Gabriel Manzini</b></sub></a> <a href="https://github.com/gmanzini" title="Manzini">🚀</a>
 
 
-Mady by ❤️  Gabriel Manzini 👋🏽 Feel free to contact me!
+Made by ❤️  Gabriel Manzini 👋🏽 Feel free to contact me!
 
 
 [![Gmail Badge](https://img.shields.io/badge/-manzini.gabriel@hotmail.com-c14438?style=flat-square&logo=Gmail&logoColor=white&link=mailto:manzini.gabriel@hotmail.com)](mailto:manzini.gabriel@hotmail.com)
